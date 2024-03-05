@@ -4,6 +4,11 @@ const routes = require('./routes');
 const dbConnection = require('./db/connect');
 
 const app = express();
+
+// Import dotenv and configure it to read .env file
+require('dotenv').config();
+// Now you can access environment variables using process.env
+
 const PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB
