@@ -12,9 +12,13 @@ app.use(bodyParser.json());
 
 // MongoDB connection
 mongoose.connect('mongodb://localhost/contact-api', {
-    useFindAndModify: false, // to suppress deprecation warnings for findAndModify
-    useCreateIndex: true // to suppress deprecation warnings for ensureIndex
+    // Remove useFindAndModify and useCreateIndex options
+    // useFindAndModify: false,
+    // useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 });
+
 mongoose.connection.on('connected', () => {
     console.log('Connected to MongoDB');
 });
