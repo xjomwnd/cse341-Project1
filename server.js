@@ -12,8 +12,8 @@ app.use(bodyParser.json());
 
 // MongoDB connection
 mongoose.connect('mongodb://localhost/contact-api', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+    useFindAndModify: false, // to suppress deprecation warnings for findAndModify
+    useCreateIndex: true // to suppress deprecation warnings for ensureIndex
 });
 mongoose.connection.on('connected', () => {
     console.log('Connected to MongoDB');
