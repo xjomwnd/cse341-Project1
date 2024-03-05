@@ -6,10 +6,7 @@ const mongoose = require('mongoose');
 const mongoURI = 'mongodb://localhost/contact-api';
 
 // Connect to MongoDB
-mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
+mongoose.connect(mongoURI).then(() => {
     console.log('Connected to MongoDB');
 }).catch((err) => {
     console.error('Failed to connect to MongoDB', err);
