@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes');
+const dbConnection = require('./db/connect');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,7 +15,12 @@ mongoose.connect('mongodb://localhost/contact-api')
         console.error('Failed to connect to MongoDB', err);
     });
 
+// Use the database connection
+dbConnection.on('error', console.error.bind(console, 'MongoDB connection error:'));
+    
 // Define routes here
+// Mount the routes
+app.use('/', routes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
