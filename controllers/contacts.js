@@ -11,7 +11,7 @@ const getAll = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
-  const userId = new ObjectId(req.params.id);
+const objectId = ObjectId.createFromTime(inputId);
   const result = await mongodb.getDb().db().collection('contacts').find({ _id: userId });
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
