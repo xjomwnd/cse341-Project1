@@ -40,7 +40,7 @@ const createContact = async (req, res) => {
 };
 
 const updateContact = async (req, res) => {
-  const userId = new ObjectId(req.params.id);
+  const objectId = ObjectId.createFromTime(inputId);
   const contact = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
