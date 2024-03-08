@@ -9,7 +9,7 @@ const app = express();
 require('dotenv').config();
 // Now you can access environment variables using process.env
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost/contact-api')
