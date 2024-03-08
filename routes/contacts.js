@@ -1,10 +1,10 @@
 // routes/contacts.js
 const express = require('express');
-const router = express.Router();
+const routes = express.Router();
 const Contact = require('../models/contact');
 
 // GET all contacts
-router.get('/', async (req, res) => {
+routes.get('/', async (req, res) => {
     try {
         const contacts = await Contact.find();
         res.json(contacts);
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST a new contact
-router.post('/', async (req, res) => {
+routes.post('/', async (req, res) => {
     const contact = new Contact({
         name: req.body.name,
         email: req.body.email,
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
 });
 
 // PUT update a contact
-router.put('/:id', async (req, res) => {
+routes.put('/:id', async (req, res) => {
     try {
         const contact = await Contact.findById(req.params.id);
         if (!contact) {
@@ -52,7 +52,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE a contact
-router.delete('/:id', async (req, res) => {
+routes.delete('/:id', async (req, res) => {
     try {
         const contact = await Contact.findById(req.params.id);
         if (!contact) {
@@ -65,4 +65,4 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = routes;
