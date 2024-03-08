@@ -1,0 +1,144 @@
+const swaggerDefinition = {
+    swagger: "2.0",
+    info: {
+      version: "1.0.0",
+      title: "Contacts API",
+      description: "API for storing and retrieving information about contacts",
+      license: {
+        name: "MIT"
+      }
+    },
+    basePath: "/api",
+    schemes: ["http"],
+    consumes: ["application/json"],
+    produces: ["application/json"],
+    paths: {
+      "/contacts": {
+        get: {
+          summary: "Get all contacts",
+          responses: {
+            200: {
+              description: "Successful operation",
+              schema: {
+                type: "array",
+                items: {
+                  $ref: "#/definitions/Contact"
+                }
+              }
+            }
+          }
+        },
+        post: {
+          summary: "Create a new contact",
+          parameters: [
+            {
+              name: "contact",
+              in: "body",
+              description: "Contact object",
+              required: true,
+              schema: {
+                $ref: "#/definitions/Contact"
+              }
+            }
+          ],
+          responses: {
+            200: {
+              description: "Contact created successfully"
+            }
+          }
+        }
+      },
+      "/contacts/{id}": {
+        get: {
+          summary: "Get contact by ID",
+          parameters: [
+            {
+              name: "id",
+              in: "path",
+              description: "ID of the contact",
+              required: true,
+              type: "string"
+            }
+          ],
+          responses: {
+            200: {
+              description: "Successful operation",
+              schema: {
+                $ref: "#/definitions/Contact"
+              }
+            }
+          }
+        },
+        put: {
+          summary: "Update contact by ID",
+          parameters: [
+            {
+              name: "id",
+              in: "path",
+              description: "ID of the contact",
+              required: true,
+              type: "string"
+            },
+            {
+              name: "contact",
+              in: "body",
+              description: "Contact object",
+              required: true,
+              schema: {
+                $ref: "#/definitions/Contact"
+              }
+            }
+          ],
+          responses: {
+            200: {
+              description: "Contact updated successfully"
+            }
+          }
+        },
+        delete: {
+          summary: "Delete contact by ID",
+          parameters: [
+            {
+              name: "id",
+              in: "path",
+              description: "ID of the contact",
+              required: true,
+              type: "string"
+            }
+          ],
+          responses: {
+            200: {
+              description: "Contact deleted successfully"
+            }
+          }
+        }
+      }
+    },
+    definitions: {
+      Contact: {
+        type: "object",
+        properties: {
+          firstName: {
+            type: "string"
+          },
+          lastName: {
+            type: "string"
+          },
+          email: {
+            type: "string",
+            format: "email"
+          },
+          favoriteColor: {
+            type: "string"
+          },
+          birthday: {
+            type: "string",
+            format: "date"
+          }
+        }
+      }
+    }
+  };
+  
+  module.exports = swaggerDefinition;
+  
