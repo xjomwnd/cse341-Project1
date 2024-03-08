@@ -23,8 +23,6 @@ mongoose.connect('mongodb://localhost/contact-api')
 // Use the database connection
 dbConnection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-// Define utils here
-require('./utils/db');
 // Mount the routes
 app.use('/', routes);
 
