@@ -28,4 +28,41 @@ router.post('/', async (req, res) => {
     }
 });
 
+// PUT update a contact
+router.put('/:id', async (req, res) => {
+    try {
+        const contact = await Contact.findById(req.params.id);
+        if (!contact) {
+            return res.status(404).json({ message: 'Contact not found' });
+        }
+        if (req.body.name) {
+            contact.name = req.body.name;
+        }
+        if (req.body.email) {
+            contact.email = req.body.email;
+        }
+        if (req.body.phone) {
+            contact.phone = req.body.phone;
+        }
+        const updatedContact = await contact.save();
+        res.json(updatedContact);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
+// DELETE a contact
+router.delete('/:id', async (req, res) => {
+    try {
+        const contact = await Contact.findById(req.params.id);
+        if (!contact) {
+            return res.status(404).json({ message: 'Contact not found' });
+        }
+        await contact.remove();
+        res.json({ message: 'Contact deleted' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 module.exports = router;
