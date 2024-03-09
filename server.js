@@ -16,7 +16,7 @@ mongoose.connect(config.database.mongoURI, { useNewUrlParser: true, useUnifiedTo
         });
     })
     .catch((err) => {
-        console.error('Failed to connect to MongoDB', err);
+        console.error('Failed to connect to MongoDB:', err);
         // Exit the process if unable to connect to MongoDB
         process.exit(1);
     });
