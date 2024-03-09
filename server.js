@@ -7,24 +7,22 @@ const app = express();
 
 // Import dotenv and configure it to read .env file
 require('dotenv').config();
-// Now you can access environment variables using process.env
-
-const PORT = process.env.PORT || 8080;
-
-// Connect to MongoDB
-mongoose.connect('mongodb://localhost/contact-api')
-    .then(() => {
-        console.log('Connected to MongoDB');
-    })
-    .catch((err) => {
-        console.error('Failed to connect to MongoDB', err);
-    });
 
 // Use the database connection
-dbConnection.on('error', console.error.bind(console, 'MongoDB connection error:'));
+dbConnection.on('error', (err) => {
+    console.error('MongoDB connection error:', err);
+    // Optionally attempt to reconnect
+    // mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+});
+
+dbConnection.once('open', () => {
+    console.log('Connected to MongoDB');
+});
 
 // Mount the routes
 app.use('/', routes);
+
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
