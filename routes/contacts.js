@@ -5,6 +5,7 @@ const Contact = require('../models/contact');
 
 // GET all contacts
 routes.get('/', async (req, res) => {
+     //#swagger.tags = ['contacts']
     try {
         const contacts = await Contact.find();
         res.json(contacts);
@@ -15,6 +16,7 @@ routes.get('/', async (req, res) => {
 
 // POST a new contact
 routes.post('/', async (req, res) => {
+     //#swagger.tags = ['contacts']
     const contact = new Contact({
         name: req.body.name,
         email: req.body.email,
@@ -30,6 +32,7 @@ routes.post('/', async (req, res) => {
 
 // PUT update a contact
 routes.put('/:id', async (req, res) => {
+     //#swagger.tags = ['contacts']
     try {
         const contact = await Contact.findById(req.params.id);
         if (!contact) {
@@ -53,6 +56,7 @@ routes.put('/:id', async (req, res) => {
 
 // DELETE a contact
 routes.delete('/:id', async (req, res) => {
+    //#swagger.tags = ['contacts']
     try {
         const contact = await Contact.findById(req.params.id);
         if (!contact) {
