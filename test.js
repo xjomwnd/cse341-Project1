@@ -1,2 +1,2 @@
-const databaseUrl = 'mongodb://Joemongo:7Mwathani77@localhost:27017/cse341-project1-4';
+const databaseUrl = process.env.DATABASE_URL;
 console.log(databaseUrl);
