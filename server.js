@@ -1,16 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes');
+const config = require('./config'); // Import the config.js file
+
 const app = express();
 
-// Import dotenv and configure it to read .env file
-require('dotenv').config();
-
-// Define the port, using the environment variable or default to 8080
-const PORT = process.env.PORT || 8080;
-
-// Connect to MongoDB using Mongoose
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+// Connect to MongoDB using the configuration from config.js
+mongoose.connect(config.database.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('Connected to MongoDB');
     })
@@ -21,7 +17,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 // Mount the routes
 app.use('/', routes);
 
-// Start the Express server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+// Start the Express server using the configured port from config.js
+app.listen(config.server.port, () => {
+    console.log(`Server is running on port ${config.server.port}`);
 });
