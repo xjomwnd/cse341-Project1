@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes');
 const config = require('./config');
+const fs = require('fs'); // Import the 'fs' module
 
 const app = express();
 
