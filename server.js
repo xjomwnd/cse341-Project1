@@ -1,52 +1,34 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes');
-const config = require('./config');
-const fs = require('fs'); // Import the 'fs' module
-
+const dbConnection = require('./db/connect');
 const app = express();
+// Import dotenv and configure it to read .env file
+require('dotenv').config();
+// Now you can access environment variables using process.env
+const PORT = process.env.PORT || 8080;
+// Connect to MongoDB
+const MongoClient = require('mongodb').MongoClient;
+const mongoUsername = process.env.MONGODB_USERNAME;
+const mongoPassword = process.env.MONGODB_PASSWORD;
+const mongoConnectionString = `mongodb://${joemongo}:${encodeURIComponent(7Mwathani77)}@localhost:27017/cse341-project1`;
 
-// Connect to MongoDB using the configuration from config.js
-mongoose.connect(config.database.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
+MongoClient.connect(mongoConnectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(client => {
     console.log('Connected to MongoDB');
-
-    // Start the Express server after successfully connecting to MongoDB
-    app.listen(config.server.port, () => {
-      console.log(`Server is running on port ${config.server.port}`);
-    });
+    // You can store the client and use it later
+    // e.g., client.db().collection('users').find(...) 
   })
-  .catch((err) => {
-    console.error('Failed to connect to MongoDB:', err);
-    process.exit(1); // Exit the process if unable to connect to MongoDB
+  .catch(err => {
+    console.error('Failed to connect to MongoDB', err);
   });
-
-// Middleware for parsing JSON request bodies
-app.use(express.json());
-
-// Middleware for handling CORS
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-  );
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
-  next();
-});
-
-// Error handling middleware for routes with potential path issues
-app.use((err, req, res, next) => {
-  if (err.type === 'invalid-path') {
-    console.error('Invalid path received in route:', err.message);
-    res.status(400).json({ message: 'Invalid path provided' });
-  } else {
-    // Pass through other errors for default handling
-    next(err);
-  }
-});
-
+// Use the database connection
+dbConnection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // Mount the routes
 app.use('/', routes);
-
-module.exports = app; // Export the app for testing or further usage
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
