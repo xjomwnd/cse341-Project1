@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { MongoClient } = require('mongodb');
+const MongodbUri = require('mongodb-uri');
 
 const dbUrl = process.env.DATABASE_URL;
 const dbOptions = {
@@ -8,15 +8,12 @@ const dbOptions = {
   monitorCommands: true,
 };
 
-const mongoClientOptions = {
-  monitorCommands: true,
-  auth: {
-    username: 'Joemongo',
-    password: '7Mwathani77',
-  },
-};
+const mongodbUri = new MongodbUri(dbUrl);
+const encodedPassword = mongodbUri.encode('Joemongo:7Mwathani77@');
 
-mongoose.connect(dbUrl, dbOptions);
+const connectionString = `mongodb://${encodedPassword}${mongodbUri.hostname}:${mongodbUri.port}/${mongodbUri.database}`;
+
+mongoose.connect(connectionString, dbOptions);
 
 const connection = mongoose.connection;
 
