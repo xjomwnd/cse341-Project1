@@ -1,34 +1,35 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const routes = require('./routes');
-const dbConnection = require('./db/connect');
 const app = express();
+const MongoClient = require('mongodb').MongoClient;
 
 // Import dotenv and configure it to read .env file
 require('dotenv').config();
 
 const PORT = process.env.PORT || 8080;
 
-// Connect to MongoDB
+// MongoDB connection details
 const mongoUsername = process.env.MONGODB_USERNAME;
 const mongoPassword = process.env.MONGODB_PASSWORD;
 const mongoConnectionString = `mongodb://localhost:27017/joemongo?authSource=admin&w=1`;
 
-mongoose.connect(mongoConnectionString, {
+// Connect to MongoDB
+MongoClient.connect(mongoConnectionString, {
+  auth: {
+    user: mongoUsername,
+    password: mongoPassword
+  },
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  user: mongoUsername,
-  pass: encodeURIComponent(mongoPassword),
 })
-  .then(() => {
+  .then(client => {
     console.log('Connected to MongoDB');
+    // You can store the client and use it later
+    // e.g., client.db().collection('users').find(...) 
   })
-  .catch((err) => {
+  .catch(err => {
     console.error('Failed to connect to MongoDB', err);
   });
-
-// Use the database connection
-dbConnection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Mount the routes
 app.use('/', routes);
