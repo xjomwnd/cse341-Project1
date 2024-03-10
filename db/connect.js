@@ -1,19 +1,31 @@
 const mongoose = require('mongoose');
+const { MongoClient } = require('mongodb');
 
-// Define the MongoDB connection URL
-const mongoURI = 'mongodb://localhost/contact-api';
+const dbUrl = process.env.DATABASE_URL;
+const dbOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  monitorCommands: true,
+};
 
-// Call the function to connect to MongoDB
-connectToMongoDB();
+const mongoClientOptions = {
+  monitorCommands: true,
+  auth: {
+    username: 'Joemongo',
+    password: '7Mwathani77',
+  },
+};
 
-// Export the mongoose connection
-module.exports = mongoose.connection;
-//
-const encodedPassword = encodeURIComponent('7Mwathani77');
-const databaseUrl = process.env.DATABASE_URL.replace('${encodedPassword}', encodedPassword);
+mongoose.connect(dbUrl, dbOptions);
 
-mongoose.connect(databaseUrl, {
-  // Any additional options for mongoose.connect()
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.error('Failed to connect to MongoDB', err));
+const connection = mongoose.connection;
+
+connection.on('connected', () => {
+  console.log('MongoDB connected');
+});
+
+connection.on('error', (err) => {
+  console.error('Failed to connect to MongoDB', err);
+});
+
+// Start the server or perform other operations after successful MongoDB connection
