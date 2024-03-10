@@ -7,7 +7,7 @@ const app = express();
 // Import dotenv and configure it to read .env file
 require('dotenv').config();
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB
 const mongoUsername = process.env.MONGODB_USERNAME;
