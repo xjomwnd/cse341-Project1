@@ -10,13 +10,14 @@ require('dotenv').config();
 const PORT = process.env.PORT || 8080;
 
 // Connect to MongoDB
+const mongoUsername = process.env.MONGODB_USERNAME;
 const mongoPassword = process.env.MONGODB_PASSWORD;
 const mongoConnectionString = `mongodb://localhost:27017/joemongo?authSource=admin&w=1`;
 
 mongoose.connect(mongoConnectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  user: 'your_username',
+  user: mongoUsername,
   pass: encodeURIComponent(mongoPassword),
 })
   .then(() => {
