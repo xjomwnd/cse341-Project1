@@ -12,8 +12,7 @@ const PORT = process.env.PORT || 8080;
 // Connect to MongoDB
 const mongoUsername = process.env.MONGODB_USERNAME;
 const mongoPassword = process.env.MONGODB_PASSWORD;
-const mongoConnectionString = `mongodb+srv://${Joemongo}:${encodeURIComponent(7Mwathani77)}@your-mongodb-cluster.example.com/your-database-name?retryWrites=true&w=majority`;
-
+const mongoConnectionString = `mongodb://localhost:27017/Joemongo`;
 mongoose.connect(mongoConnectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
