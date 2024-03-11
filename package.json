@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "scripts": {
-      "start": "nodemon server.js"
-    },   
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.18.3",
@@ -13,5 +10,8 @@
     "mongoose": "^8.2.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
   }
 }
