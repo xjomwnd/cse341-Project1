@@ -1,25 +1,13 @@
-const Contact = require('./models/contact');
+// models/contact.js
+const mongoose = require('mongoose');
 
-// Example route to create a new contact
-app.post('/api/contacts', async (req, res) => {
-  try {
-    const newContact = await Contact.create(req.body);
-    res.status(201).json(newContact);
-  } catch (err) {
-    console.error('Failed to create contact', err);
-    res.status(500).json({ error: 'Failed to create contact' });
-  }
+const contactSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: String,
+  // Add any other fields you need for the Contact model
 });
 
-// Example route to fetch all contacts
-app.get('/api/contacts', async (req, res) => {
-  try {
-    const contacts = await Contact.find();
-    res.json(contacts);
-  } catch (err) {
-    console.error('Failed to fetch contacts', err);
-    res.status(500).json({ error: 'Failed to fetch contacts' });
-  }
-});
+const Contact = mongoose.model('Contact', contactSchema);
 
-// Add more routes for updating and deleting contacts as needed
+module.exports = Contact;
