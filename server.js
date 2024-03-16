@@ -1,7 +1,7 @@
 // Import required modules
 const express = require('express');
 const bodyParser = require('body-parser');
-const Contact = require('./models/contact'); // Correct import statement
+const contact = require('./models/contact');
 const mongoose = require('mongoose');
 
 // Create the Express app
