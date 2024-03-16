@@ -6,8 +6,8 @@ const mongodb = require('mongodb');
 const app = express();
 app.use(bodyParser.json());
 // MongoDB connection string
-//const connectionString = 'mongodb://localhost:27017/joemongo?authSource=admin&w=1';
-const connectionString='mongodb+srv://Joemongo:<password>@cluster0.urkbujj.mongodb.net/'
+const connectionString = 'mongodb://localhost:27017/joemongo?authSource=admin&w=1';
+//const connectionString='mongodb+srv://Joemongo:<password>@cluster0.urkbujj.mongodb.net/'
 
 // Connect to MongoDB
 mongodb.MongoClient.connect(connectionString, (err, client) => {
