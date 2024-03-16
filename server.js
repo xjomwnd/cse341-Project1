@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 // MongoDB connection string
 //const connectionString = 'mongodb://localhost:27017/joemongo?authSource=admin&w=1';
-mongoose.connect('mongodb+srv://Joemongo:7Mwathani77@cluster0.ppzbp33.mongodb.net/')
+mongoose.connect('mongodb+srv://Joemongo:7Mwathani77@cluster0.urkbujj.mongodb.net')
 
 // Connect to MongoDB
 mongodb.MongoClient.connect(connectionString, (err, client) => {
