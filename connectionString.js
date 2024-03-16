@@ -1,7 +1,7 @@
 const mongodb = require('mongodb');
 
 // Replace <password> with your actual password and <database> with your actual database name
-const connectionString = 'mongodb+srv://Joemongo:7Mwathani77@cluster0.ppzbp33.mongodb.net/<database>';
+const connectionString = 'mongodb+srv://Joemongo:7Mwathani77@cluster0.urkbujj.mongodb.net';
 
 mongodb.MongoClient.connect(connectionString, (err, client) => {
     if (err) {
