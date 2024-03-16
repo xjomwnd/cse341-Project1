@@ -1,0 +1,28 @@
+# GET request to fetch all data
+GET http://localhost:3000/api/data
+
+# POST request to create a new contact
+POST http://localhost:3000/api/contacts
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "phone": "123-456-7890"
+}
+
+# GET request to fetch all contacts
+GET http://localhost:3000/api/contacts
+
+# PUT request to update a contact
+PUT http://localhost:3000/api/contacts/PUT_ID_HERE
+Content-Type: application/json
+
+{
+  "name": "Updated Name",
+  "email": "updated.email@example.com",
+  "phone": "987-654-3210"
+}
+
+# DELETE request to delete a contact
+DELETE http://localhost:3000/api/contacts/DELETE_ID_HERE
