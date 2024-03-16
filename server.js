@@ -1,7 +1,7 @@
 // Import required modules
 const express = require('express');
 const bodyParser = require('body-parser');
-const Contact = require('./models/contact');
+const Contact = require('./models/contact'); // Correct import statement
 const mongoose = require('mongoose');
 
 // Create the Express app
@@ -24,10 +24,9 @@ mongoose.connect('mongodb+srv://Joemongo:7Mwathani77@cluster0.urkbujj.mongodb.ne
 
 // Define your API routes here
 // Example route to fetch data from MongoDB using Mongoose
-const YourModel = require('./models/YourModel'); // Import your Mongoose model
 app.get('/api/data', async (req, res) => {
   try {
-    const data = await YourModel.find();
+    const data = await Contact.find(); // Use the Contact model instead of YourModel
     res.json(data);
   } catch (err) {
     console.error('Failed to fetch data from MongoDB', err);
