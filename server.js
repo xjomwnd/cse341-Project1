@@ -6,7 +6,7 @@ const mongodb = require('mongodb');
 const app = express();
 app.use(bodyParser.json());
 // MongoDB connection string
-const connectionString = 'mongodb://joemongo:7Mwathani77@your-mongodb-host:27017/cse341-project1';
+const connectionString = 'mongodb://localhost:27017/joemongo?authSource=admin&w=1';
 // Connect to MongoDB
 mongodb.MongoClient.connect(connectionString, (err, client) => {
   if (err) {
